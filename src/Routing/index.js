@@ -24,19 +24,19 @@ export default function App() {
     }, [url, useState])
     return (
         <>
-          
-                {isLoading === true ?
-                    <Loading />
-                    : <NavigationContainer>
-                        <Stack.Navigator>
-                            <>
-                                <Stack.Screen name="Main" component={Main} options={{ headerShown: false }} />
-                                <Stack.Screen name="Home" component={Home} options={{ headerShown: false }} />
-                                <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
-                            </>
-                        </Stack.Navigator>
-                    </NavigationContainer>}
-       
+
+            {isLoading === true ?
+                <Loading />
+                : <NavigationContainer>
+                    <Stack.Navigator>
+                        <>
+                            <Stack.Screen name="Home" component={Home} options={{ headerShown: false }} />
+                            {/* <Stack.Screen name="Main" component={Main} options={{ headerShown: false }} />
+                            <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} /> */}
+                        </>
+                    </Stack.Navigator>
+                </NavigationContainer>}
+
         </>
 
     );

@@ -1,4 +1,4 @@
-import { Dimensions } from 'react-native';
+import { BackHandler, Dimensions } from 'react-native';
 import { StyleSheet } from "react-native";
 import { Colors } from '../../Utils/Color';
 import { Fonts } from '../../Utils/Fonts';
@@ -51,14 +51,13 @@ export const styles = StyleSheet.create({
         borderRadius: 15
     },
     dropdown1BtnStyle: {
-        width: '40%',
+        width: '50%',
         height: 50,
         backgroundColor: '#FFF',
         borderWidth: 1,
         borderColor: '#444',
-        borderRadius:20,
-        marginHorizontal:20,
-        marginVertical:10
+        borderRadius: 20,
+
     },
     dropdown1BtnTxtStyle: { color: '#444', textAlign: 'left' },
     dropdown1DropdownStyle: { backgroundColor: '#EFEFEF' },
@@ -74,6 +73,22 @@ export const styles = StyleSheet.create({
     imgLogo: {
         height: 250,
         width: "100%",
-        marginTop:10
+        marginTop: 10
+    },
+    view_Type: {
+        marginTop: 10,
+        marginHorizontal: 20,
+        flexDirection: "row",
+
+    },
+    view_switch: {
+        flexDirection: "row",
+    },
+    text_notification: {
+        color: "#000",
+        textAlign: 'center', // <-- the magic
+        textAlignVertical: 'center',
+        height:"100%",
+        marginHorizontal:10
     }
 })

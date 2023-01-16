@@ -9,6 +9,7 @@ export const UpdateChat = (data) => {
         line2: data.line2,
         signature: data.signature,
         type: data.type,
+        notification: data.notification
         //Timestamp: Date.now()
     };
     set(db_Chat, Chat)
