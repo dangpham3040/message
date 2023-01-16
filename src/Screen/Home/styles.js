@@ -33,10 +33,47 @@ export const styles = StyleSheet.create({
         paddingRight: -5
     },
     listProduct: {
-        paddingHorizontal:20
+        paddingHorizontal: 20
     },
-    view_seach:{
+    view_seach: {
+        marginHorizontal: 20,
+        marginVertical: 10
+    },
+    view_save: {
+        justifyContent: "center",
+        backgroundColor: Colors.primary,
+        borderRadius: 5,
+        alignItems: "center",
+        marginHorizontal: 20,
+        height: 40,
+        width: "90%",
+        marginBottom: 10,
+        borderRadius: 15
+    },
+    dropdown1BtnStyle: {
+        width: '40%',
+        height: 50,
+        backgroundColor: '#FFF',
+        borderWidth: 1,
+        borderColor: '#444',
+        borderRadius:20,
         marginHorizontal:20,
         marginVertical:10
+    },
+    dropdown1BtnTxtStyle: { color: '#444', textAlign: 'left' },
+    dropdown1DropdownStyle: { backgroundColor: '#EFEFEF' },
+    dropdown1RowStyle: { backgroundColor: '#EFEFEF', borderBottomColor: '#C5C5C5' },
+    dropdown1RowTxtStyle: { color: '#444', textAlign: 'left' },
+    dropdown1SelectedRowStyle: { backgroundColor: 'rgba(0,0,0,0.1)' },
+    dropdown1searchInputStyleStyle: {
+        backgroundColor: '#EFEFEF',
+        borderRadius: 8,
+        borderBottomWidth: 1,
+        borderBottomColor: '#444',
+    },
+    imgLogo: {
+        height: 250,
+        width: "100%",
+        marginTop:10
     }
 })

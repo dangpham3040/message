@@ -17,6 +17,7 @@ export default function App(props) {
                 placeholder={props.text}
                 onChangeText={e => onChangeText(e)}
                 value={props.value}
+                placeholderTextColor= 'gray'
             />
         </View>
     );
