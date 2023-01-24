@@ -21,7 +21,6 @@ export const styles = StyleSheet.create({
         backgroundColor: Colors.second,
         borderColor: Colors.third,
         borderWidth: 1.5,
-        borderRadius: 20,
         alignSelf: "center",
     },
 

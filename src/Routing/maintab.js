@@ -2,11 +2,12 @@ import React, { useEffect, useState } from 'react';
 
 //screen
 import Home from '../Screen/Home'
-import login from '../Screen/Login'
+import Website from '../Screen/website'
 //Icons
 import HomeIcon from '../Icons/Home'
 import HeartIcon from '../Icons/Heart'
 import MenuIcon from '../Icons/Menu'
+import FontAwesomeicon from 'react-native-vector-icons/MaterialIcons';
 //other
 import { Colors } from '../Utils/Color';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -20,10 +21,10 @@ export default function App() {
         < Tab.Navigator
             screenOptions={({ route }) => ({
                 tabBarIcon: ({ size }) => {
-                    if (route.name === 'Home') {
-                        return <HomeIcon fill={srceen === 0 ? Colors.primary : Colors.second} dot={srceen === 0 ? Colors.primary : Colors.eighth} />;
-                    } else if (route.name === 'Favorite') {
-                        return <HeartIcon fill={srceen === 1 ? Colors.primary : Colors.second} dot={srceen === 1 ? Colors.primary : Colors.eighth} />;
+                    if (route.name === 'Chat') {
+                        return <FontAwesomeicon name={'chat'} color={srceen === 0 ? Colors.primary : Colors.eighth} size={20} />;
+                    } else if (route.name === 'Remote') {
+                        return <FontAwesomeicon name={'settings-remote'} color={srceen === 1 ? Colors.primary : Colors.eighth} size={20} />;
                     }
                     else if (route.name === 'Menu') {
                         return <MenuIcon fill={srceen === 2 ? Colors.primary : Colors.eighth} dot={srceen === 2 ? Colors.primary : Colors.eighth} />;
@@ -36,13 +37,13 @@ export default function App() {
                 inactiveTintColor: Colors.eighth,
             }}
         >
-            <Tab.Screen name="Home" component={HomeStack} options={{ headerShown: false, }}
+            <Tab.Screen name="Chat" component={HomeStack} options={{ headerShown: false, }}
                 listeners={() => ({
                     tabPress: () => {
                         setSrceen(0)
                     },
                 })} />
-            <Tab.Screen name="Favorite" component={FavoriteStack} options={{ headerShown: false, }}
+            <Tab.Screen name="Remote" component={FavoriteStack} options={{ headerShown: false, }}
                 listeners={() => ({
                     tabPress: () => {
                         setSrceen(1)
@@ -67,14 +68,14 @@ export const HomeStack = () => {
 export const FavoriteStack = () => {
     return (
         <Stack.Navigator initialRouteName="Favorite-stack">
-            <Stack.Screen name="Login-stack" component={login} options={{ headerShown: false }} />
+            <Stack.Screen name="Website-stack" component={Website} options={{ headerShown: false }} />
         </Stack.Navigator>
     );
 };
 export const MenuStack = () => {
     return (
         <Stack.Navigator initialRouteName="Favorite-stack">
-            <Stack.Screen name="Login-stack" component={login} options={{ headerShown: false }} />
+            <Stack.Screen name="Login-stack" component={Website} options={{ headerShown: false }} />
         </Stack.Navigator>
     );
 };

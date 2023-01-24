@@ -35,7 +35,7 @@ export const styles = StyleSheet.create({
     listProduct: {
         paddingHorizontal: 20
     },
-    view_seach: {
+    view_input: {
         marginHorizontal: 20,
         marginVertical: 10
     },
@@ -71,9 +71,9 @@ export const styles = StyleSheet.create({
         borderBottomColor: '#444',
     },
     imgLogo: {
-        height: 250,
+        height: 370,
         width: "100%",
-        marginTop: 10
+       marginBottom:5
     },
     view_Type: {
         marginTop: 10,

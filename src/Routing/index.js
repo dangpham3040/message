@@ -7,7 +7,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import Loading from '../Screen/Loading'
 //screen
 import Home from '../Screen/Home'
-import Login from '../Screen/Login'
+import Website from '../Screen/website'
 //main tab
 import Main from './maintab'
 //styles
@@ -30,9 +30,9 @@ export default function App() {
                 : <NavigationContainer>
                     <Stack.Navigator>
                         <>
+                            <Stack.Screen name="Main" component={Main} options={{ headerShown: false }} />
                             <Stack.Screen name="Home" component={Home} options={{ headerShown: false }} />
-                            {/* <Stack.Screen name="Main" component={Main} options={{ headerShown: false }} />
-                            <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} /> */}
+                            <Stack.Screen name="Website" component={Website} options={{ headerShown: false }} />
                         </>
                     </Stack.Navigator>
                 </NavigationContainer>}

@@ -13,11 +13,11 @@ export default function App(props) {
                 {props.icon}
             </View>
             <TextInput
-                style={styles.input}
+                style={[styles.input,props.style]}
                 placeholder={props.text}
                 onChangeText={e => onChangeText(e)}
                 value={props.value}
-                placeholderTextColor= 'gray'
+                placeholderTextColor='gray'
             />
         </View>
     );

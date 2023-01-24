@@ -25,7 +25,7 @@ import Input from '../../Components/Textinput'
 import Header from '../../Components/Header_Home'
 import { Line } from 'react-native-svg';
 //Model
-import { UpdateChat, createType } from '../../Model/Chat';
+import { UpdateChat, createType, createHistory } from '../../Model/Chat';
 import { types } from '@babel/core';
 import { async } from '@firebase/util';
 import { database } from '../../Utils/firebase-Config';
@@ -39,11 +39,11 @@ export default function App(props) {
   const [Type, setType] = useState("")
   const [Line1, setLine1] = useState("")
   const [Line2, setLine2] = useState("")
-  const [Signature, setSignature] = useState("<P H A M   H A I   D A N G> ")
+  const [Signature, setSignature] = useState("< U N K N O W N >")
   const handlclear = () => {
     setLine1("")
     setLine2("")
-    setSignature("<P H A M   H A I   D A N G> ")
+    setSignature("< U N K N O W N >")
   }
   const check = () => {
     if (Type == "" ) {
@@ -65,6 +65,12 @@ export default function App(props) {
       line2: Line2,
       signature: Signature,
       notification: isSwitchOn
+    })
+    createHistory({
+      type: Type,
+      line1: Line1,
+      line2: Line2,
+      signature: Signature,
     })
     handlclear()
   }
@@ -92,7 +98,7 @@ export default function App(props) {
   }, [useState], data)
   return (
     <ScrollView style={common.full} >
-      <Image style={styles.imgLogo} source={require('../../Static/Images/logo.png')} ></Image>
+      <Image style={styles.imgLogo} source={require('../../Static/Images/logo-removebg-preview.jpg')} ></Image>
       <View style={styles.view_Type}>
         <SelectDropdown
           data={data}
@@ -136,32 +142,33 @@ export default function App(props) {
 
       </View>
 
-      <View style={styles.view_seach}>
+      <View style={styles.view_input}>
         <Input
           text={"Type..."}
           send={(e) => setType(e)}
           value={Type}
         />
       </View>
-      <View style={styles.view_seach}>
+      <View style={styles.view_input}>
         <Input
           text={"Title..."}
           send={(e) => setLine1(e)}
           value={Line1}
         />
       </View>
-      <View style={styles.view_seach}>
+      <View style={styles.view_input}>
         <Input
           text={"context..."}
           send={(e) => setLine2(e)}
           value={Line2}
         />
       </View>
-      <View style={styles.view_seach}>
+      <View style={styles.view_input}>
         <Input
           text={"signature..."}
           send={(e) => setSignature(e)}
           value={Signature}
+          
         />
       </View>
       <TouchableOpacity style={styles.view_save} onPress={() => check()}>
