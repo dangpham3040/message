@@ -1,7 +1,10 @@
 import { getDatabase, ref, set, onValue, push } from "firebase/database"
 import { database } from "../Utils/firebase-Config";
+var today = Date.now()
 
 export const UpdateChat = (data) => {
+   
+    console.log(today/1000)
     var db_Chat = ref(database, 'Chat/');
     db_Chat = ref(database, 'Chat/');
     var Chat = {
@@ -9,24 +12,26 @@ export const UpdateChat = (data) => {
         line2: data.line2,
         signature: data.signature,
         type: data.type,
-        notification: data.notification
-        //Timestamp: Date.now()
+        notification: data.notification,
+        Timestamp: today/1000
     };
     set(db_Chat, Chat)
 };
 export const GetData = () => {
+    var temp = []
     const Ref = ref(database, 'Type/');
     var returnArr = [];
     onValue(Ref, (snapshot) => {
-        returnArr = []
+        returnArr = [];
         snapshot.forEach(function (childSnapshot) {
             var key = childSnapshot.key;
             var item = childSnapshot.val();
             returnArr.push(item.name);
         });
+        temp = returnArr
     });
-    return returnArr;
-
+    console.log("log: " + temp)
+    return temp;
 };
 export const createType = (data) => {
     var db_Type = ref(database, 'Type/');
@@ -47,7 +52,7 @@ export const updatetime = () => {
     var db_web = ref(database, 'Time/');
     db_web = ref(database, 'Time/');
     const newReference = push(db_web);
-    set(db_web, newReference + 1)
+    set(db_web, today/1000)
 };
 export const createHistory = (data) => {
     var db_History = ref(database, 'History/');

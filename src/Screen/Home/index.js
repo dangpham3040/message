@@ -12,6 +12,9 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import SelectDropdown from 'react-native-select-dropdown';
 import { getDatabase, ref, onValue } from "firebase/database"
 import { Switch } from 'react-native-paper';
+import publicIP from 'react-native-public-ip';
+import NetworkInfo from 'react-native-network-info';
+import axios from 'axios';
 //Icons
 import SeachICon from '../../Icons/Seach'
 //styles
@@ -25,7 +28,7 @@ import Input from '../../Components/Textinput'
 import Header from '../../Components/Header_Home'
 import { Line } from 'react-native-svg';
 //Model
-import { UpdateChat, createType, createHistory } from '../../Model/Chat';
+import { UpdateChat, createType, createHistory, GetData } from '../../Model/Chat';
 import { types } from '@babel/core';
 import { async } from '@firebase/util';
 import { database } from '../../Utils/firebase-Config';
@@ -40,13 +43,16 @@ export default function App(props) {
   const [Line1, setLine1] = useState("")
   const [Line2, setLine2] = useState("")
   const [Signature, setSignature] = useState("< U N K N O W N >")
+  var today = new Date();
+  let now = today.toLocaleDateString("en-GB")
+
   const handlclear = () => {
     setLine1("")
     setLine2("")
     setSignature("< U N K N O W N >")
   }
   const check = () => {
-    if (Type == "" ) {
+    if (Type == "") {
       return alert("pls enter Type info")
     }
     var new_array = []
@@ -89,13 +95,31 @@ export default function App(props) {
     });
 
   };
+
+
+  const getIP = async () => {
+    // Get Local IP
+    const ipAddress = await NetworkInfo.NetworkInfo.getIPAddress();
+    // Get IPv4 IP
+    const ipv4Address = await NetworkInfo.NetworkInfo.getIPV4Address();
+    console.log(ipAddress)
+  }
+
   useEffect(() => {
     _getData()
-    const intervalId = setInterval(() => {  //assign interval to a variable to clear it.
+    console.log("date: " + now)
+    // console.log(navigator.userAgent)
+    // publicIP()
+    getIP()
+    // const intervalId = setInterval(() => {  //assign interval to a variable to clear it.
+    //   SetisLoaing(false)
+    // }, 1500)
+    // return () => clearInterval(intervalId); //This is important'
+    if (data.length > 0) {
       SetisLoaing(false)
-    }, 1500)
-    return () => clearInterval(intervalId); //This is important'
-  }, [useState], data)
+      console.log(data)
+    }
+  }, [])
   return (
     <ScrollView style={common.full} >
       <Image style={styles.imgLogo} source={require('../../Static/Images/logo-removebg-preview.jpg')} ></Image>
@@ -136,7 +160,7 @@ export default function App(props) {
 
         </SelectDropdown>
         <View style={styles.view_switch}>
-          <Text style={[styles.text_notification,isSwitchOn?{color:"green"}:{color:"red"}]}>notification </Text>
+          <Text style={[styles.text_notification, isSwitchOn ? { color: "green" } : { color: "red" }]}>notification </Text>
           <Switch value={isSwitchOn} onValueChange={onToggleSwitch} />
         </View>
 
@@ -168,7 +192,7 @@ export default function App(props) {
           text={"signature..."}
           send={(e) => setSignature(e)}
           value={Signature}
-          
+
         />
       </View>
       <TouchableOpacity style={styles.view_save} onPress={() => check()}>
