@@ -26,7 +26,10 @@ export const styles = StyleSheet.create({
         borderRadius: 15
     },
     connet_view: {
-        marginTop: 50
+        position:'absolute',
+        bottom:20,
+        right:0,
+        left:0
     },
     reloadicon: {
         position: 'absolute',
@@ -45,6 +48,10 @@ export const styles = StyleSheet.create({
     radio_view: {
         marginLeft: 10,
         marginTop: 5
-    }
-
+    },
+    imgLogo: {
+        height: 370,
+        width: "100%",
+       marginBottom:20
+    },
 })

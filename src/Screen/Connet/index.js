@@ -3,7 +3,7 @@ import {
   Text,
   TouchableOpacity,
   View,
-
+  Image
 } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/MaterialCommunityIcons';
 import { getDatabase, ref, onValue } from "firebase/database"
@@ -52,13 +52,22 @@ export default function App(props) {
       isfull: isfull
     })
   }
-  useEffect(() => {
+  const getupdate = () => {
     getIP()
-    // setIptemp(IP)
-  }, [])
+    setIptemp(IP)
+  }
+  useEffect(() => {
+    getupdate()
+    if (IP == false) {
+      getupdate()
+    }
+
+  }, [IP])
   return (
     <View style={styles.full}>
+             <Image style={styles.imgLogo} source={require('../../Static/Images/logo-removebg-preview.jpg')} ></Image>
       <View style={styles.connet_view}>
+ 
         <Text style={styles.title}>Full Screen:</Text>
         <RadioForm
           formHorizontal={true}
@@ -95,7 +104,7 @@ export default function App(props) {
             ))
           }
         </RadioForm>
-        <Text style={styles.title}>Network Name:</Text>
+        {/* <Text style={styles.title}>Network Name:</Text> */}
         <Text style={styles.title}>IP:</Text>
         <View style={styles.view_input}>
           <Input
@@ -106,7 +115,7 @@ export default function App(props) {
             // editable={false}
             selectTextOnFocus={false}
           />
-          <TouchableOpacity style={styles.reloadicon} onPress={() => setIptemp(IP)}>
+          <TouchableOpacity style={styles.reloadicon} onPress={() => getupdate(IP)}>
             <FontAwesome name={'reload'} size={20} color={Colors.primary} />
           </TouchableOpacity>
 
