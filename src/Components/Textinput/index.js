@@ -13,11 +13,15 @@ export default function App(props) {
                 {props.icon}
             </View>
             <TextInput
-                style={[styles.input,props.style]}
+                style={[styles.input, props.style]}
                 placeholder={props.text}
                 onChangeText={e => onChangeText(e)}
-                value={props.value}
+                value={props.value.toString()}
                 placeholderTextColor='gray'
+                keyboardType={props.inputtype || 'default'}
+                editable={props.editable || true}
+                selectTextOnFocus={props.selectTextOnFocus||true}
+                
             />
         </View>
     );

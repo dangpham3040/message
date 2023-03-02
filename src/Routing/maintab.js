@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 //screen
 import Home from '../Screen/Home'
 import Website from '../Screen/website'
+import Connet from '../Screen/Connet'
 //Icons
 import HomeIcon from '../Icons/Home'
 import HeartIcon from '../Icons/Heart'
@@ -24,10 +25,10 @@ export default function App() {
                     if (route.name === 'Chat') {
                         return <FontAwesomeicon name={'chat'} color={srceen === 0 ? Colors.primary : Colors.eighth} size={20} />;
                     } else if (route.name === 'Remote') {
-                        return <FontAwesomeicon name={'settings-remote'} color={srceen === 1 ? Colors.primary : Colors.eighth} size={20} />;
+                        return <FontAwesomeicon name={'settings-remote'} color={srceen === 1 ? Colors.primary : Colors.eighth}  />;
                     }
-                    else if (route.name === 'Menu') {
-                        return <MenuIcon fill={srceen === 2 ? Colors.primary : Colors.eighth} dot={srceen === 2 ? Colors.primary : Colors.eighth} />;
+                    else if (route.name === 'Connet') {
+                        return <FontAwesomeicon name={'cast-connected'} color={srceen === 2 ? Colors.primary : Colors.eighth}  />;
                     }       
                 },
             })
@@ -49,7 +50,7 @@ export default function App() {
                         setSrceen(1)
                     },
                 })} />
-                <Tab.Screen name="Menu" component={MenuStack} options={{ headerShown: false, }}
+                <Tab.Screen name="Connet" component={ConnetStack} options={{ headerShown: false, }}
                 listeners={() => ({
                     tabPress: () => {
                         setSrceen(2)
@@ -72,10 +73,10 @@ export const FavoriteStack = () => {
         </Stack.Navigator>
     );
 };
-export const MenuStack = () => {
+export const ConnetStack = () => {
     return (
         <Stack.Navigator initialRouteName="Favorite-stack">
-            <Stack.Screen name="Login-stack" component={Website} options={{ headerShown: false }} />
+            <Stack.Screen name="Connet-stack" component={Connet} options={{ headerShown: false }} />
         </Stack.Navigator>
     );
 };

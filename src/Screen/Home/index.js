@@ -28,7 +28,7 @@ import Input from '../../Components/Textinput'
 import Header from '../../Components/Header_Home'
 import { Line } from 'react-native-svg';
 //Model
-import { UpdateChat, createType, createHistory, GetData } from '../../Model/Chat';
+import { UpdateChat, createType, createHistory, GetData } from '../../Model/Model';
 import { types } from '@babel/core';
 import { async } from '@firebase/util';
 import { database } from '../../Utils/firebase-Config';
@@ -102,14 +102,12 @@ export default function App(props) {
     const ipAddress = await NetworkInfo.NetworkInfo.getIPAddress();
     // Get IPv4 IP
     const ipv4Address = await NetworkInfo.NetworkInfo.getIPV4Address();
-    console.log(ipAddress)
+   
   }
 
   useEffect(() => {
     _getData()
     console.log("date: " + now)
-    // console.log(navigator.userAgent)
-    // publicIP()
     getIP()
     // const intervalId = setInterval(() => {  //assign interval to a variable to clear it.
     //   SetisLoaing(false)

@@ -1,10 +1,10 @@
 import { getDatabase, ref, set, onValue, push } from "firebase/database"
 import { database } from "../Utils/firebase-Config";
 var today = Date.now()
-
+//Chat
 export const UpdateChat = (data) => {
-   
-    console.log(today/1000)
+
+    console.log(today / 1000)
     var db_Chat = ref(database, 'Chat/');
     db_Chat = ref(database, 'Chat/');
     var Chat = {
@@ -13,7 +13,7 @@ export const UpdateChat = (data) => {
         signature: data.signature,
         type: data.type,
         notification: data.notification,
-        Timestamp: today/1000
+        Timestamp: today / 1000
     };
     set(db_Chat, Chat)
 };
@@ -42,6 +42,7 @@ export const createType = (data) => {
     };
     set(db_Type, type)
 };
+//website
 export const createweb = (data) => {
     var db_web = ref(database, 'Web/');
     db_web = ref(database, 'Web/');
@@ -52,7 +53,7 @@ export const updatetime = () => {
     var db_web = ref(database, 'Time/');
     db_web = ref(database, 'Time/');
     const newReference = push(db_web);
-    set(db_web, today/1000)
+    set(db_web, today / 1000)
 };
 export const createHistory = (data) => {
     var db_History = ref(database, 'History/');
@@ -97,4 +98,16 @@ export const updateMute = () => {
     db_mute = ref(database, 'Mute/');
     const newReference = push(db_mute);
     set(db_mute, newReference + 1)
+};
+//Connet
+export const UpdateConnet = (data) => {
+    console.log("connet "+today / 1000)
+    var db_Connet = ref(database, 'Connet/');
+    db_Connet = ref(database, 'Connet/');
+    var connet = {
+        ip: data.ip,
+        isfull: data.isfull,
+        Timestamp: today / 1000
+    };
+    set(db_Connet, connet)
 };

@@ -25,10 +25,10 @@ import { common } from '../../Utils/common_styles';
 import Input from '../../Components/Textinput'
 import { useState } from 'react';
 import WebView from 'react-native-webview';
-import { createweb, updateDown, updateFullScreen, updateMute } from '../../Model/Chat';
-import { updatetime } from '../../Model/Chat';
-import { updatePlay } from '../../Model/Chat';
-import { updateUp } from '../../Model/Chat';
+import { createweb, updateDown, updateFullScreen, updateMute } from '../../Model/Model';
+import { updatetime } from '../../Model/Model';
+import { updatePlay } from '../../Model/Model';
+import { updateUp } from '../../Model/Model';
 
 
 export default function App(props) {
