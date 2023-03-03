@@ -48,7 +48,7 @@ export default function App(props) {
       return alert("Ip pls")
     }
     UpdateConnet({
-      ip: IP,
+      ip: ipTemp,
       isfull: isfull
     })
   }
@@ -65,7 +65,7 @@ export default function App(props) {
   }, [IP])
   return (
     <View style={styles.full}>
-      <Image style={styles.imgLogo} source={require('../../Static/Images/logo-removebg-preview.jpg')} ></Image>
+      {/* <Image style={styles.imgLogo} source={require('../../Static/Images/logo-removebg-preview.jpg')} ></Image> */}
       <View style={styles.connet_view}>
         <Text style={styles.title}>Full Screen:</Text>
         <RadioForm
