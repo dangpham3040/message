@@ -8,6 +8,8 @@ import {
 import FontAwesome from 'react-native-vector-icons/MaterialCommunityIcons';
 import { getDatabase, ref, onValue } from "firebase/database"
 import NetworkInfo from 'react-native-network-info';
+import { Configuration, OpenAIApi } from 'openai'
+import { URLSearchParams } from 'url-search-params';
 // import RadioGroup from 'react-native-radio-buttons-group';
 import RadioForm, { RadioButton, RadioButtonInput, RadioButtonLabel } from 'react-native-simple-radio-button';
 //styles
@@ -30,6 +32,8 @@ export default function App(props) {
   const [choose, setchoose] = useState(0)
   const [isfull, setIsfull] = useState("No")
   const [ipTemp, setIptemp] = useState("")
+  const [prompt, setPrompt] = useState("hello");
+  const [apiResponse, setApiResponse] = useState("");
   const getIP = async () => {
     // Get Local IP
     const ipAddress = await NetworkInfo.NetworkInfo.getIPAddress();
@@ -56,11 +60,37 @@ export default function App(props) {
     getIP()
     setIptemp(IP)
   }
+  const OPENAI_API_KEY ="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";
+  const configuration = new Configuration({
+    apiKey: OPENAI_API_KEY,
+
+  });
+
+  //const openai = new OpenAIApi(OPENAI_API_KEY);
+  const openai = new OpenAIApi(configuration);
+  const getOpenai = async () => {
+    try {
+      const completion = await openai.createCompletion({
+        model: "text-davinci-003",
+        prompt: "Hello world",
+      });
+      console.log(completion.data.choices[0].text);
+    } catch (error) {
+      if (error.response) {
+        console.log("status: " + error.response.status);
+        console.log("data: " + error.response.data);
+      } else {
+        console.log("message: " + error.message);
+      }
+    }
+  }
+
   useEffect(() => {
     getupdate()
     if (IP == false) {
       getupdate()
     }
+    getOpenai()
 
   }, [IP])
   return (
@@ -114,7 +144,7 @@ export default function App(props) {
             // editable={false}
             selectTextOnFocus={false}
           />
-          <TouchableOpacity style={styles.reloadicon} onPress={() => getupdate(IP)}>
+          <TouchableOpacity style={styles.reloadicon} onPress={() => getupdate()}>
             <FontAwesome name={'reload'} size={20} color={Colors.primary} />
           </TouchableOpacity>
 
