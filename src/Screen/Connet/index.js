@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,  } from 'react';
 import {
   Text,
   TouchableOpacity,
   View,
-  Image
+  Image,
+  Linking
 } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/MaterialCommunityIcons';
 import { getDatabase, ref, onValue } from "firebase/database"
@@ -23,6 +24,8 @@ import Input from '../../Components/Textinput'
 import { UpdateConnet } from '../../Model/Model';
 
 
+
+
 export default function App(props) {
   const [IP, setIP] = useState(false)
   var radio_props = [
@@ -32,8 +35,7 @@ export default function App(props) {
   const [choose, setchoose] = useState(0)
   const [isfull, setIsfull] = useState("No")
   const [ipTemp, setIptemp] = useState("")
-  const [prompt, setPrompt] = useState("hello");
-  const [apiResponse, setApiResponse] = useState("");
+
   const getIP = async () => {
     // Get Local IP
     const ipAddress = await NetworkInfo.NetworkInfo.getIPAddress();
@@ -60,44 +62,24 @@ export default function App(props) {
     getIP()
     setIptemp(IP)
   }
-  const OPENAI_API_KEY ="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";
-  const configuration = new Configuration({
-    apiKey: OPENAI_API_KEY,
-
-  });
-
-  //const openai = new OpenAIApi(OPENAI_API_KEY);
-  const openai = new OpenAIApi(configuration);
-  const getOpenai = async () => {
-    try {
-      const completion = await openai.createCompletion({
-        model: "text-davinci-003",
-        prompt: "Hello world",
-      });
-      console.log(completion.data.choices[0].text);
-    } catch (error) {
-      if (error.response) {
-        console.log("status: " + error.response.status);
-        console.log("data: " + error.response.data);
-      } else {
-        console.log("message: " + error.message);
-      }
-    }
-  }
-
+ 
   useEffect(() => {
     getupdate()
     if (IP == false) {
       getupdate()
     }
-    getOpenai()
+
 
   }, [IP])
   return (
     <View style={styles.full}>
       {/* <Image style={styles.imgLogo} source={require('../../Static/Images/logo-removebg-preview.jpg')} ></Image> */}
       <View style={styles.connet_view}>
+        <TouchableOpacity style={styles.view_save} onPress={() => Linking.openURL('https://google.com')}>
+          <Text style={styles.textsave}>Connet Pc</Text>
+        </TouchableOpacity>
         <Text style={styles.title}>Full Screen:</Text>
+
         <RadioForm
           formHorizontal={true}
           animation={true}
@@ -150,8 +132,7 @@ export default function App(props) {
 
         </View>
         <TouchableOpacity style={styles.view_save} onPress={() => check()}>
-          <Text style={styles.textsave}>Save</Text>
-
+          <Text style={styles.textsave}>Connet</Text>
         </TouchableOpacity>
       </View>
     </View>

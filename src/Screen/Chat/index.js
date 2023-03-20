@@ -65,7 +65,7 @@ export default function App(props) {
         flatListRef.current.scrollToEnd({ animated: true });
     };
     useEffect(() => {
-        console.log(process.env)
+    
         flatListRef.current.scrollToEnd({ animated: true });
     }, [messages])
     return (
