@@ -7,10 +7,8 @@ import {
   Linking
 } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/MaterialCommunityIcons';
-import { getDatabase, ref, onValue } from "firebase/database"
 import NetworkInfo from 'react-native-network-info';
-import { Configuration, OpenAIApi } from 'openai'
-import { URLSearchParams } from 'url-search-params';
+
 // import RadioGroup from 'react-native-radio-buttons-group';
 import RadioForm, { RadioButton, RadioButtonInput, RadioButtonLabel } from 'react-native-simple-radio-button';
 //styles
