@@ -185,14 +185,14 @@ export default function App(props) {
           value={Line2}
         />
       </View>
-      <View style={styles.view_input}>
+      {/* <View style={styles.view_input}>
         <Input
           text={"signature..."}
           send={(e) => setSignature(e)}
           value={Signature}
 
         />
-      </View>
+      </View> */}
       <TouchableOpacity style={styles.view_save} onPress={() => check()}>
         <Text style={styles.textsave}>Save</Text>
       </TouchableOpacity>

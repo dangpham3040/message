@@ -44,6 +44,8 @@ export const styles = StyleSheet.create({
         color: Colors.primary,
         marginLeft: 20,
         textAlign: 'left',
+        textTransform:'capitalize',
+        marginBottom:10
     },
     radio_view: {
         marginLeft: 10,
@@ -56,5 +58,27 @@ export const styles = StyleSheet.create({
     },
     textsave:{
         color:"#fff"
+    },
+    View_Off:{
+        justifyContent: "center",
+        backgroundColor: Colors.primary,
+
+        alignItems: "center",
+        marginHorizontal: 20,
+        height: 40,
+        width: "90%",
+        marginBottom: 10,
+        borderRadius: 15
+    },
+    view_On:{
+        justifyContent: "center",
+        backgroundColor: "green",
+
+        alignItems: "center",
+        marginHorizontal: 20,
+        height: 40,
+        width: "90%",
+        marginBottom: 10,
+        borderRadius: 15
     }
 })

@@ -1,4 +1,4 @@
-import React, { useState, useEffect,  } from 'react';
+import React, { useState, useEffect, } from 'react';
 import {
   Text,
   TouchableOpacity,
@@ -8,9 +8,15 @@ import {
 } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/MaterialCommunityIcons';
 import NetworkInfo from 'react-native-network-info';
-
+// import {
+//   getOrientation,
+//   lockToPortrait,
+//   lockToLandscape,
+// } from "react-native-orientation";
 // import RadioGroup from 'react-native-radio-buttons-group';
 import RadioForm, { RadioButton, RadioButtonInput, RadioButtonLabel } from 'react-native-simple-radio-button';
+import { getDatabase, ref, onValue } from "firebase/database"
+import { database } from '../../Utils/firebase-Config';
 //styles
 import { styles } from './styles';
 import { common } from '../../Utils/common_styles';
@@ -19,13 +25,11 @@ import { Colors } from '../../Utils/Color';
 import Input from '../../Components/Textinput'
 
 //Model
-import { UpdateConnet } from '../../Model/Model';
-
-
-
-
+import { UpdateConnet, updateSharePC, updateCancelShare } from '../../Model/Model';
+import { async } from '@firebase/util';
+const delay = ms => new Promise(res => setTimeout(res, ms));
 export default function App(props) {
-  const [IP, setIP] = useState(false)
+  const [IP, setIP] = useState(true)
   var radio_props = [
     { label: 'No', value: 0 },
     { label: 'Yes', value: 1 }
@@ -33,6 +37,8 @@ export default function App(props) {
   const [choose, setchoose] = useState(0)
   const [isfull, setIsfull] = useState("No")
   const [ipTemp, setIptemp] = useState("")
+  const [state, setState] = useState(false)
+  const [url, setUrl] = useState('')
 
   const getIP = async () => {
     // Get Local IP
@@ -60,21 +66,43 @@ export default function App(props) {
     getIP()
     setIptemp(IP)
   }
- 
+  const Geturl = () => {
+    const Ref = ref(database, 'url/');
+    var temp = ""
+    onValue(Ref, (snapshot) => {
+      temp = snapshot.val()
+      console.log(temp)
+      return setUrl(temp)
+    });
+
+  };
+  const openurl = async () => {
+    setState(!state)
+    if (url != "") {
+      if (!state) {
+        updateSharePC()
+        await delay(5000)
+        // lockToLandscape()
+        return Linking.openURL("http://" + url)
+      }
+      updateCancelShare()
+    }
+  }
   useEffect(() => {
+    Geturl()
     getupdate()
     if (IP == false) {
       getupdate()
     }
-
 
   }, [IP])
   return (
     <View style={styles.full}>
       {/* <Image style={styles.imgLogo} source={require('../../Static/Images/logo-removebg-preview.jpg')} ></Image> */}
       <View style={styles.connet_view}>
-        <TouchableOpacity style={styles.view_save} onPress={() => Linking.openURL('https://google.com')}>
-          <Text style={styles.textsave}>Connet Pc</Text>
+      <Text style={styles.title}>share Pc screen:</Text>
+        <TouchableOpacity style={[state ? styles.view_On : styles.View_Off]} onPress={() => openurl()}>
+          <Text style={styles.textsave}>{state ? "On" : "Off"}</Text>
         </TouchableOpacity>
         <Text style={styles.title}>Full Screen:</Text>
 

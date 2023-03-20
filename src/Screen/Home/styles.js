@@ -71,9 +71,9 @@ export const styles = StyleSheet.create({
         borderBottomColor: '#444',
     },
     imgLogo: {
-        height: 370,
+        height: 400,
         width: "100%",
-       marginBottom:5
+       marginBottom:20
     },
     view_Type: {
         marginTop: 10,

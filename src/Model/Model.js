@@ -1,10 +1,8 @@
-import { getDatabase, ref, set, onValue, push } from "firebase/database"
+import { getDatabase, ref, set, onValue, push, get } from "firebase/database"
 import { database } from "../Utils/firebase-Config";
 
 //Chat
 export const UpdateChat = (data) => {
-
-    console.log(Date.now() / 1000)
     var db_Chat = ref(database, 'Chat/');
     db_Chat = ref(database, 'Chat/');
     var Chat = {
@@ -52,7 +50,6 @@ export const createweb = (data) => {
 export const updatetime = () => {
     var db_web = ref(database, 'Time/');
     db_web = ref(database, 'Time/');
-    const newReference = push(db_web);
     set(db_web, Date.now() / 1000)
 };
 export const createHistory = (data) => {
@@ -71,37 +68,26 @@ export const createHistory = (data) => {
 };
 export const updatePlay = () => {
     var db_Play = ref(database, 'Play/');
-    db_Play = ref(database, 'Play/');
-    const newReference = push(db_Play);
-    set(db_Play, newReference + 1)
+    set(db_Play, Date.now() / 1000)
 };
 export const updateFullScreen = () => {
     var db_Full = ref(database, 'Full/');
-    db_Full = ref(database, 'Full/');
-    const newReference = push(db_Full);
-    set(db_Full, newReference + 1)
+    set(db_Full, Date.now() / 1000)
 };
 export const updateUp = () => {
     var db_Up = ref(database, 'Up/');
-    db_Up = ref(database, 'Up/');
-    const newReference = push(db_Up);
-    set(db_Up, newReference + 1)
+    set(db_Up, Date.now() / 1000)
 };
 export const updateDown = () => {
     var db_Full = ref(database, 'Down/');
-    db_Full = ref(database, 'Down/');
-    const newReference = push(db_Full);
-    set(db_Full, newReference + 1)
+    set(db_Full, Date.now() / 1000)
 };
 export const updateMute = () => {
     var db_mute = ref(database, 'Mute/');
-    db_mute = ref(database, 'Mute/');
-    const newReference = push(db_mute);
-    set(db_mute, newReference + 1)
+    set(db_mute, Date.now() / 1000)
 };
 //Connet
 export const UpdateConnet = (data) => {
-    console.log("connet "+Date.now() / 1000)
     var db_Connet = ref(database, 'Connet/');
     db_Connet = ref(database, 'Connet/');
     var connet = {
@@ -110,4 +96,22 @@ export const UpdateConnet = (data) => {
         Timestamp: Date.now() / 1000
     };
     set(db_Connet, connet)
+};
+//sharePC
+export const updateSharePC = () => {
+    var db_Share = ref(database, 'SharePC/');
+    set(db_Share, Date.now() / 1000)
+};
+export const updateCancelShare = () => {
+    var db_Share = ref(database, 'cancelShare/');
+    set(db_Share, Date.now() / 1000)
+};
+export const Geturl = () => {
+    const Ref = ref(database, 'url/');
+
+    var temp = ""
+    onValue(Ref, (snapshot) => {
+        temp = snapshot.val()
+    });
+    return temp;
 };
