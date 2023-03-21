@@ -1,19 +1,23 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { View, TextInput, Button, FlatList, StyleSheet, Text } from 'react-native';
+import { View, TextInput, Button, FlatList, Text, TouchableOpacity, Clipboard } from 'react-native';
 import { Configuration, OpenAIApi } from 'openai'
+import { useDispatch, useSelector } from 'react-redux';
 // require('dotenv').config({ debug: true })
 //styles
 import { styles } from './styles';
 import { common } from '../../Utils/common_styles';
 import { OPENAI_API_KEY } from '../../Utils/api';
+import { ADD_MESSAGE } from '../../Redux/type';
 // require('dotenv').config();
+
 
 export default function App(props) {
     const [message, setMessage] = useState('');
-    const [messages, setMessages] = useState([]);
+    // const [messages, setMessages] = useState([]);
     const flatListRef = useRef(null);
-  
-    const [reference, setReference] = useState(null)
+
+    const dispatch = useDispatch();
+    const messages = useSelector(state => state.messages);
     const configuration = new Configuration({
         apiKey: OPENAI_API_KEY,
 
@@ -37,7 +41,8 @@ export default function App(props) {
             console.log(answer);
             const timestamp = new Date().getTime();
             const newMessage = { message: answer, sent: false, timestamp };
-            setMessages(prevMessages => [...prevMessages, newMessage]);
+            // setMessages(prevMessages => [...prevMessages, newMessage]);
+            dispatch({ type: ADD_MESSAGE, payload: newMessage });
             flatListRef.current.scrollToEnd({ animated: true });
         } catch (error) {
             if (error.response) {
@@ -54,22 +59,26 @@ export default function App(props) {
             // setMessages([...messages, { message, sent: true }]);
             const timestamp = new Date().getTime();
             const newMessage = { message: message, sent: true, timestamp };
-            setMessages(prevMessages => [...prevMessages, newMessage]);
+            // setMessages(prevMessages => [...prevMessages, newMessage]);
+            dispatch({ type: ADD_MESSAGE, payload: newMessage });
             setMessage('');
             getAireply();
             flatListRef.current.scrollToEnd({ animated: true });
         }
     };
     const handleInputFocus = () => {
-        console.log('Input is focused');
         flatListRef.current.scrollToEnd({ animated: true });
     };
+    const handleLongPress = async (message) => {
+        Clipboard.setString(message);
+
+    }
     useEffect(() => {
-    
+        console.log(messages)
         flatListRef.current.scrollToEnd({ animated: true });
     }, [messages])
     return (
-        <View style={[ common.full,styles.container]}>
+        <View style={[common.full, styles.container]}>
             <View style={styles.chatcontainer}>
                 <FlatList
                     ref={flatListRef}
@@ -77,9 +86,11 @@ export default function App(props) {
                     keyExtractor={(item, index) => index.toString()}
 
                     renderItem={({ item }) => (
-                        <View style={[styles.bubble, item.sent ? styles.sentBubble : styles.receivedBubble]}>
-                            <Text style={styles.messageText}>{item.message}</Text>
-                        </View>
+                        <TouchableOpacity onLongPress={() => handleLongPress(item.message)}>
+                            <View style={[styles.bubble, item.sent ? styles.sentBubble : styles.receivedBubble]}>
+                                <Text style={styles.messageText}>{item.message}</Text>
+                            </View>
+                        </TouchableOpacity>
                     )}
 
                 />
@@ -91,8 +102,10 @@ export default function App(props) {
                     onChangeText={(setMessage)}
                     placeholder="Type your message..."
                     onFocus={handleInputFocus}
+                    multiline={true}
+                    placeholderTextColor="#000"
                 />
-                <Button title="Send" style={styles.sendButtonText} onPress={handleSend} color="#7200eb"/>
+                <Button title="Send" style={styles.sendButtonText} onPress={handleSend} color="#7200eb" />
             </View>
         </View>
     );
