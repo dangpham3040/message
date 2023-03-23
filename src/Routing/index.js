@@ -8,6 +8,7 @@ import Loading from '../Screen/Loading'
 //screen
 import Home from '../Screen/Home'
 import Website from '../Screen/website'
+import Webview from '../Screen/Webview'
 //main tab
 import Main from './maintab'
 //styles
@@ -33,6 +34,7 @@ export default function App() {
                             <Stack.Screen name="Main" component={Main} options={{ headerShown: false }} />
                             <Stack.Screen name="Home" component={Home} options={{ headerShown: false }} />
                             <Stack.Screen name="Website" component={Website} options={{ headerShown: false }} />
+                            <Stack.Screen name="Wevview" component={Webview} options={{ headerShown: false }} />
                         </>
                     </Stack.Navigator>
                 </NavigationContainer>}

@@ -108,7 +108,6 @@ export const updateCancelShare = () => {
 };
 export const Geturl = () => {
     const Ref = ref(database, 'url/');
-
     var temp = ""
     onValue(Ref, (snapshot) => {
         temp = snapshot.val()

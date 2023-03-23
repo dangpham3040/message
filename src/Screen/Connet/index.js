@@ -83,7 +83,8 @@ export default function App(props) {
         updateSharePC()
         await delay(5000)
         // lockToLandscape()
-        return Linking.openURL("http://" + url)
+        // return Linking.openURL("http://" + url)
+        return props.navigation.navigate('Wevview', { url: url })
       }
       updateCancelShare()
     }
@@ -100,7 +101,7 @@ export default function App(props) {
     <View style={styles.full}>
       {/* <Image style={styles.imgLogo} source={require('../../Static/Images/logo-removebg-preview.jpg')} ></Image> */}
       <View style={styles.connet_view}>
-      <Text style={styles.title}>share Pc screen:</Text>
+        <Text style={styles.title}>share Pc screen:</Text>
         <TouchableOpacity style={[state ? styles.view_On : styles.View_Off]} onPress={() => openurl()}>
           <Text style={styles.textsave}>{state ? "On" : "Off"}</Text>
         </TouchableOpacity>
